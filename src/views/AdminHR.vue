@@ -117,7 +117,7 @@
                   >
                     <option value="pending">Pending</option>
                     <option value="approve">Approve</option>
-                    <option value="reject">Reject</option>
+                    <option value="rejected">Rejected</option>
                     <option value="all">All Status</option>
                   </select>
                   <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
@@ -171,8 +171,8 @@
                   <td class="px-6 py-5">
                     <span :class="[
                       'px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider',
-                      (request.status_sdm || '').toLowerCase().startsWith('approv') ? 'bg-emerald-500/10 text-emerald-400' : 
-                      (request.status_sdm || '').toLowerCase().startsWith('reject') ? 'bg-red-500/10 text-red-400' : 
+                      (request.status_sdm || '').toLowerCase().startsWith('approve') ? 'bg-emerald-500/10 text-emerald-400' : 
+                      (request.status_sdm || '').toLowerCase().startsWith('rejected') ? 'bg-red-500/10 text-red-400' : 
                       'bg-amber-500/10 text-amber-400'
                     ]">
                       {{ request.status_sdm || 'Pending' }}
@@ -225,7 +225,7 @@
                    <select v-model="manageForm.status_sdm" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50 appearance-none text-slate-200">
                       <option value="pending">Pending</option>
                       <option value="approve">Approve</option>
-                      <option value="reject">Reject</option>
+                      <option value="rejected">Rejected</option>
                    </select>
                 </div>
              </div>

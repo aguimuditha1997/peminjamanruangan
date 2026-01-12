@@ -122,7 +122,7 @@
                 Booking Data
               </h2>
               <div class="flex gap-2">
-                <button class="px-4 py-2 bg-slate-900/50 border border-white/5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-all">
+                <button @click="exportBookings" class="px-4 py-2 bg-slate-900/50 border border-white/5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-all">
                   <i class="fas fa-download mr-2"></i> Export
                 </button>
               </div>
@@ -160,11 +160,12 @@
               <thead>
                 <tr class="text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-white/5 bg-white/[0.01]">
                   <th class="px-6 py-4">Name</th>
-                  <th class="px-6 py-4">Rental Number</th>
-                  <th class="px-6 py-4 text-xs">Room</th>
-                  <th class="px-6 py-4 text-xs">Room Details</th>
-                  <th class="px-6 py-4 text-xs">Date</th>
-                  <th class="px-6 py-4 text-xs text-right">Action</th>
+                  <th class="px-6 py-4">Code</th>
+                  <th class="px-6 py-4">Organization</th>
+                  <th class="px-6 py-4">Room</th>
+                  <th class="px-6 py-4">Start Time</th>
+                  <th class="px-6 py-4">End Time</th>
+                  <th class="px-6 py-4 text-right">Action</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-white/5">
@@ -174,10 +175,7 @@
                       <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-[10px] font-bold text-emerald-400 border border-emerald-500/10">
                         {{ rental.user.split(' ').map(n => n[0]).join('') }}
                       </div>
-                      <div class="flex flex-col">
-                        <span class="font-bold text-sm text-slate-200">{{ rental.user }}</span>
-                        <span class="text-[10px] text-slate-500 font-medium uppercase tracking-tight">{{ rental.org }}</span>
-                      </div>
+                      <span class="font-bold text-sm text-slate-200">{{ rental.user }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
@@ -186,32 +184,31 @@
                     </span>
                   </td>
                   <td class="px-6 py-5">
+                    <span class="text-sm text-slate-300 uppercase text-xs font-medium">{{ rental.org }}</span>
+                  </td>
+                  <td class="px-6 py-5">
                     <span class="text-sm text-slate-300 font-medium">{{ rental.room }}</span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-[10px] text-slate-500 line-clamp-1 truncate max-w-[200px]" :title="rental.roomDetail">
-                      {{ rental.roomDetail }}
-                    </span>
+                    <div class="flex flex-col">
+                      <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Start</span>
+                      <span class="text-emerald-400 font-mono text-xs">{{ rental.start_time }}</span>
+                    </div>
                   </td>
                   <td class="px-6 py-5">
                     <div class="flex flex-col">
-                      <span class="text-xs text-slate-300">{{ rental.date }}</span>
-                      <span class="text-[10px] text-slate-500">{{ rental.time }}</span>
+                      <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">End</span>
+                      <span class="text-emerald-400 font-mono text-xs">{{ rental.end_time }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5 text-right">
-                    <div class="flex items-center justify-end gap-2">
-                      <button 
-                        @click="openManageModal(rental)" 
-                        class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider bg-emerald-400/10 px-3 py-1.5 rounded-lg border border-emerald-400/20 transition-all flex items-center gap-1.5"
-                      >
-                        <i class="fas fa-sliders-h"></i>
-                        Manage
-                      </button>
-                      <RouterLink to="/admin/rooms" class="text-[10px] font-bold text-slate-400 hover:text-slate-300 uppercase tracking-wider bg-white/5 px-3 py-1.5 rounded-lg border border-white/10 transition-all">
-                        Room Details
-                      </RouterLink>
-                    </div>
+                    <button 
+                      @click="openDetailsModal(rental)" 
+                      class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider bg-emerald-400/10 px-3 py-1.5 rounded-lg border border-emerald-400/20 transition-all flex items-center gap-1.5 ml-auto"
+                    >
+                      <i class="fas fa-info-circle"></i>
+                      Details
+                    </button>
                   </td>
                 </tr>
                 <tr v-if="filteredRentals.length === 0">
@@ -393,6 +390,85 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- Details Modal -->
+    <Teleport to="body">
+      <div v-if="isDetailsModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+        <div class="glass-card w-full max-w-2xl border-white/5 animate-in fade-in zoom-in duration-300">
+          <div class="p-6 border-b border-white/5 flex items-center justify-between">
+            <h3 class="text-lg font-bold">Booking <span class="text-emerald-400">Details</span></h3>
+            <button @click="isDetailsModalOpen = false" class="text-slate-500 hover:text-white transition-colors">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Name</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200">
+                  {{ detailsData.name || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Organization</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200">
+                  {{ detailsData.organization || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Email</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200 flex items-center gap-2">
+                  <i class="fas fa-envelope text-emerald-400 text-xs"></i>
+                  {{ detailsData.email || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">WhatsApp</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200 flex items-center gap-2">
+                  <i class="fab fa-whatsapp text-emerald-400 text-xs"></i>
+                  {{ detailsData.no_whatsapp || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Room</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200">
+                  {{ detailsData.room || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Booking Code</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-emerald-400 font-mono">
+                  {{ detailsData.code || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Start Time</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-emerald-400 font-mono">
+                  {{ detailsData.start_time || 'N/A' }}
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">End Time</label>
+                <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-emerald-400 font-mono">
+                  {{ detailsData.end_time || 'N/A' }}
+                </div>
+              </div>
+            </div>
+            <div class="space-y-1.5" v-if="detailsData.purpose">
+              <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Purpose</label>
+              <div class="bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-200">
+                {{ detailsData.purpose }}
+              </div>
+            </div>
+            <div class="pt-4">
+              <button @click="isDetailsModalOpen = false" class="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all text-slate-300">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -409,6 +485,7 @@ const searchQuery = ref('')
 // Room Management State
 const isModalOpen = ref(false)
 const isManageModalOpen = ref(false)
+const isDetailsModalOpen = ref(false)
 const isEditing = ref(false)
 const currentRoomSlug = ref(null) // Using slug instead of ID for routing
 const form = ref({
@@ -426,6 +503,7 @@ const manageForm = ref({
   room_id: ''
 })
 const activeBooking = ref(null)
+const detailsData = ref({})
 
 const slugify = (text) => {
   return text
@@ -485,7 +563,7 @@ const filteredRentals = computed(() => {
     .map(rental => {
       // Format time for display
       const startStr = rental.start_time || rental.start_date || ''
-      const timeStr = startStr.includes(' ') ? startStr.split(' ')[1] : startStr.includes('T') ? startStr.split('T')[1] : ''
+      const endStr = rental.end_time || rental.end_date || ''
       
       return {
         ...rental,
@@ -494,7 +572,9 @@ const filteredRentals = computed(() => {
         room: rental.room?.nameroom || rental.room_name || 'N/A',
         roomDetail: rental.room?.detail || rental.room?.details || 'N/A',
         date: startStr.split(' ')[0] || startStr.split('T')[0] || 'N/A',
-        time: timeStr || 'N/A',
+        time: (startStr.includes(' ') ? startStr.split(' ')[1] : startStr.includes('T') ? startStr.split('T')[1] : '') || 'N/A',
+        start_time: startStr || 'N/A',
+        end_time: endStr || 'N/A',
         code: rental.code || rental.loan_code || 'N/A'
       }
     })
@@ -655,6 +735,56 @@ const saveBookingChanges = async () => {
     alert(error.response?.data?.message || 'Failed to update booking.')
   } finally {
     isLoading.value = false
+  }
+}
+
+const openDetailsModal = (booking) => {
+  detailsData.value = booking
+  isDetailsModalOpen.value = true
+}
+
+const exportBookings = () => {
+  try {
+    // Prepare CSV headers
+    const headers = ['Code', 'Name', 'Organization', 'Email', 'WhatsApp', 'Room', 'Start Time', 'End Time', 'Purpose', 'Status']
+    
+    // Prepare CSV rows
+    const rows = filteredRentals.value.map(rental => [
+      rental.code || '',
+      rental.user || '',
+      rental.org || '',
+      rental.email || '',
+      rental.no_whatsapp || '',
+      rental.room || '',
+      rental.start_time || '',
+      rental.end_time || '',
+      rental.purpose || '',
+      rental.status || ''
+    ])
+    
+    // Combine headers and rows
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    ].join('\n')
+    
+    // Create blob and download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    const url = URL.createObjectURL(blob)
+    
+    link.setAttribute('href', url)
+    link.setAttribute('download', `bookings_export_${new Date().toISOString().split('T')[0]}.csv`)
+    link.style.visibility = 'hidden'
+    
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
+    URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Export failed:', error)
+    alert('Failed to export bookings. Please try again.')
   }
 }
 </script>
