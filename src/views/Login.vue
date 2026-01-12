@@ -5,7 +5,7 @@
     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 blur-[120px] rounded-full animate-pulse delay-700"></div>
 
     <div class="w-full max-w-md relative">
-      <!-- Logo -->
+      <!-- Logo 1 -->
       <div class="flex flex-col items-center mb-8">
         <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/20 mb-4 transform hover:rotate-12 transition-transform duration-500">
           <i class="fas fa-bolt text-white text-2xl"></i>
