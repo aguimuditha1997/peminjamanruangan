@@ -32,19 +32,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
 const props = defineProps({
-  selectedRoom: String
+  selectedRoom: String,
+  events: {
+    type: Array,
+    default: () => []
+  }
 })
 
 const emit = defineEmits(['select-time'])
 
-const calendarOptions = ref({
+const calendarOptions = computed(() => ({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
   initialView: 'timeGridWeek',
   headerToolbar: {
@@ -61,10 +65,7 @@ const calendarOptions = ref({
   nowIndicator: true,
   editable: false,
   droppable: false,
-  events: [
-    { title: 'Executive Meeting', start: new Date().toISOString().split('T')[0] + 'T10:00:00', end: new Date().toISOString().split('T')[0] + 'T12:00:00', color: '#6366f1' },
-    { title: 'Project Sync', start: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T14:00:00', end: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T15:30:00', color: '#6366f1' }
-  ],
+  events: props.events,
   select: (info) => {
     emit('select-time', { 
       startStr: info.startStr.substring(0, 16),
@@ -72,9 +73,22 @@ const calendarOptions = ref({
     })
   },
   eventClick: (info) => {
-    alert('Room: ' + info.event.title + '\nStatus: Reserved')
+    const { name, organization } = info.event.extendedProps
+    const start = info.event.start.toLocaleString()
+    const end = info.event.end ? info.event.end.toLocaleString() : 'N/A'
+    
+    alert(
+      `Booking Details:\n` +
+      `------------------\n` +
+      `User: ${name || 'N/A'}\n` +
+      `Org: ${organization || 'N/A'}\n` +
+      `Room: ${info.event.title}\n` +
+      `Start: ${start}\n` +
+      `End: ${end}\n` +
+      `Status: Reserved`
+    )
   }
-})
+}))
 </script>
 
 <style>

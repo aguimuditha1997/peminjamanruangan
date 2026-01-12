@@ -13,7 +13,7 @@
     <div class="p-6">
       <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">{{ name }}</h3>
       <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-        {{ description }}
+        {{ detail }}
       </p>
       
       <div class="flex items-center justify-between">
@@ -38,7 +38,7 @@ defineProps({
   name: String,
   image: String,
   capacity: Number,
-  description: String,
+  detail: String,
   tags: Array
 })
 

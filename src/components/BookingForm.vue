@@ -51,7 +51,7 @@
           <div class="space-y-2">
             <label class="text-sm font-medium text-slate-300">WhatsApp Number</label>
             <input 
-              v-model="form.whatsapp" 
+              v-model="form.no_whatsapp" 
               type="tel" 
               placeholder="e.g. +62 812 3456 7890" 
               class="input-field"
@@ -64,7 +64,7 @@
             <label class="text-sm font-medium text-slate-300">Selected Room</label>
             <select v-model="form.room" class="input-field bg-slate-900" required>
               <option value="" disabled>Select a room</option>
-              <option v-for="room in rooms" :key="room" :value="room">{{ room }}</option>
+              <option v-for="r in rooms" :key="r.id" :value="r.name">{{ r.name }}</option>
             </select>
           </div>
 
@@ -139,7 +139,7 @@
             </svg>
           </div>
           <h3 class="text-2xl font-bold mb-2">Booking Success!</h3>
-          <p class="text-slate-400 mb-8">Thank you, {{ form.name }}. We've received your request for {{ form.organization }}. We'll contact you at {{ form.whatsapp }} and send a confirmation to {{ form.email }} shortly.</p>
+          <p class="text-slate-400 mb-8">Thank you, {{ form.name }}. We've received your request for {{ form.organization }}. We'll contact you at {{ form.no_whatsapp }} and send a confirmation to {{ form.email }} shortly.</p>
           <button @click="resetForm" class="btn-primary w-full">Great, thanks!</button>
         </div>
       </div>
@@ -148,7 +148,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import api from '../services/api'
 
 const props = defineProps({
   rooms: {
@@ -164,7 +165,7 @@ const form = reactive({
   name: '',
   organization: '',
   email: '',
-  whatsapp: '',
+  no_whatsapp: '',
   room: props.selectedRoom || '',
   start: '',
   end: '',
@@ -173,8 +174,6 @@ const form = reactive({
 })
 
 // Update form when props change
-import { watch } from 'vue'
-
 watch(() => props.selectedRoom, (newVal) => {
   if (newVal) form.room = newVal
 })
@@ -190,13 +189,41 @@ watch(() => props.selectedEnd, (newEnd) => {
 const isSubmitting = ref(false)
 const showSuccess = ref(false)
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   isSubmitting.value = true
-  // Simulate API call
-  setTimeout(() => {
+  
+  try {
+    const selectedRoomObj = props.rooms.find(r => r.name === form.room)
+    
+    const payload = {
+      name: form.name,
+      organization: form.organization,
+      email: form.email,
+      no_whatsapp: form.no_whatsapp,
+      room_id: selectedRoomObj?.id,
+      room_name: form.room,
+      start_date: form.start.replace('T', ' '),
+      end_date: form.end.replace('T', ' '),
+      start_time: form.start.replace('T', ' '),
+      end_time: form.end.replace('T', ' '),
+      note: form.note,
+      purpose: form.purpose,     
+    }
+
+    const response = await api.post('/bookings', payload)
+    
+    if (response.status === 201 || response.status === 200 || response.data.success) {
+      showSuccess.value = true
+    } else {
+      throw new Error('Unexpected response from server')
+    }
+  } catch (error) {
+    console.error('Booking submission failed:', error)
+    const errorMessage = error.response?.data?.message || 'Failed to submit booking. Please check your connection.'
+    alert(errorMessage)
+  } finally {
     isSubmitting.value = false
-    showSuccess.value = true
-  }, 1500)
+  }
 }
 
 const resetForm = () => {
@@ -204,7 +231,7 @@ const resetForm = () => {
   form.name = ''
   form.organization = ''
   form.email = ''
-  form.whatsapp = ''
+  form.no_whatsapp = ''
   form.room = ''
   form.start = ''
   form.end = ''
