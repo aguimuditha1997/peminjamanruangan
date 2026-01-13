@@ -14,11 +14,11 @@
       <!-- Rooms Section -->
       <section id="rooms" class="py-24 px-6 bg-slate-900/30">
         <div class="max-w-7xl mx-auto">
-          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div class="max-w-xl">
-              <h2 class="text-3xl md:text-5xl font-bold mb-4">Our Premium <span class="text-emerald-400">Spaces</span></h2>
-              <p class="text-slate-400">Choose from our curated selection of high-performance environments designed for productivity.</p>
-            </div>
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-4 uppercase italic">
+              Ruangan <span class="text-primary not-italic">Tersedia</span>
+            </h2>
+            <p class="text-slate-400 font-medium">Temukan ruangan yang sesuai dengan kebutuhan Anda.</p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -34,7 +34,7 @@
           <div v-if="rooms.length > 4" class="mt-16 flex justify-center">
             <button 
               @click="showAllRooms = !showAllRooms" 
-              class="px-8 py-4 border border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-400 font-bold rounded-2xl transition-all duration-300 flex items-center gap-2 group"
+              class="px-8 py-4 border border-primary/30 hover:bg-primary/10 text-primary font-bold rounded-2xl transition-all duration-300 flex items-center gap-2 group"
             >
               {{ showAllRooms ? 'Show Less' : 'See More Rooms' }}
               <svg 
@@ -158,7 +158,7 @@ const approvedEvents = computed(() => {
       start: startDate,
       end: endDate,
       extendedProps: { ...b },
-      color: '#6366f1'
+      color: '#1dcad3'
     }
   }).filter(e => e.start && e.end)
 })

@@ -1,31 +1,71 @@
-<template>
-  <div class="relative pt-32 pb-20 px-6 overflow-hidden">
-    <!-- Gradient Blobs -->
-    <div class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-emerald-500/10 blur-[120px] rounded-full"></div>
-    <div class="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-indigo-500/10 blur-[100px] rounded-full"></div>
+<script setup>
+import heroBg from '../assets/hero-bg.png'
+</script>
 
-    <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        Premium Spaces Available
-      </div>
+<template>
+  <div class="relative min-h-[85vh] flex items-center pt-52 pb-20 px-6 overflow-hidden">
+    <!-- Background Image with Multi-layer Overlay -->
+    <div class="absolute inset-0 -z-20">
+      <img :src="heroBg" alt="Hero Background" class="w-full h-full object-cover scale-105 animate-slow-zoom opacity-60">
+      <!-- Dark Overlay for Readability -->
+      <div class="absolute inset-0 bg-background/70 backdrop-blur-[1px]"></div>
+      <!-- Gradient Fade to Bottom -->
+      <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+      <!-- Vignette Effect -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(3,32,56,0.5)_100%)]"></div>
+    </div>
+
+    <!-- Animated Glow Blobs (Updated colors) -->
+    <div class="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full animate-pulse-slow"></div>
+    <div class="absolute bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-primary/5 blur-[110px] rounded-full animate-pulse-slow-delay"></div>
+
+    <div class="max-w-7xl mx-auto flex flex-col items-center text-center mt-24">
       
-      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
-        Reserve Your Perfect <br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-indigo-400">Collaboration Space</span>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[1.1] text-white">
+        Selamat Datang di <br />
+        <span class="text-primary">
+          Primakara Room Booking
+        </span>
       </h1>
       
-      <p class="max-w-2xl text-slate-400 text-lg md:text-xl mb-12">
-        Professional room booking made simple for your organization. High-speed internet, premium amenities, and seamless coordination.
+      <p class="max-w-2xl text-slate-300 text-lg md:text-xl mb-12 leading-relaxed drop-shadow-sm">
+        Temukan dan pesan ruangan terbaik untuk rapat, belajar, atau kolaborasi kreatif Anda. 
+        <span class="text-primary font-medium">Produktifitas dimulai dari sini.</span>
       </p>
       
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button class="btn-primary">Explore Rooms</button>
-        <button class="px-6 py-3 border border-white/10 hover:bg-white/5 rounded-xl transition-all">View Schedule</button>
+      <div class="flex flex-col sm:flex-row gap-5">
+        <a href="#rooms" class="btn-primary px-10 py-4 text-lg">
+          Lihat Ruangan
+        </a>
+        <a href="#schedule" class="btn-secondary px-10 py-4 text-lg">
+          Lihat Jadwal
+        </a>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s ease-in-out infinite alternate;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-slow-delay {
+  animation: pulse-slow 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+</style>

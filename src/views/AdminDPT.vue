@@ -1,34 +1,31 @@
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex">
+  <div class="min-h-screen bg-background text-white flex">
     <!-- Sidebar -->
     <aside class="w-64 border-r border-white/5 bg-slate-900/50 backdrop-blur-xl flex flex-col sticky top-0 h-screen overflow-y-auto">
       <div class="p-6">
         <RouterLink to="/" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
-            <i class="fas fa-bolt text-white text-xs"></i>
-          </div>
-          <span class="text-lg font-bold tracking-tight text-white">Admin<span class="text-blue-400">Dash</span></span>
+          <img :src="logo" alt="Primakara Logo" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300" />
         </RouterLink>
       </div>
 
       <nav class="flex-1 px-4 space-y-2 mt-4">
-        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-blue-500/10 !text-blue-400">
+        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-th-large w-5"></i>
           Dashboard
         </RouterLink>
-        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-blue-500/10 !text-blue-400">
+        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-door-open w-5"></i>
           Room Name
         </RouterLink>
-        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-blue-500/10 !text-blue-400">
+        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-calendar-alt w-5"></i>
           Activity Schedule
         </RouterLink>
-        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-blue-500/10 !text-blue-400">
+        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-user-tie w-5"></i>
           Admin HR
         </RouterLink>
-        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-blue-500/10 !text-blue-400">
+        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-users-cog w-5"></i>
           Admin DPT
         </RouterLink>
@@ -52,10 +49,10 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 min-h-screen bg-slate-950">
-      <header class="h-20 border-b border-white/5 bg-slate-900/20 backdrop-blur-sm px-8 flex items-center justify-between sticky top-0 z-10 w-full">
+    <main class="flex-1 min-h-screen bg-background">
+      <header class="h-20 border-b border-white/5 bg-[#032038]/40 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10 w-full">
         <div>
-          <h1 class="text-xl font-bold">Admin <span class="text-blue-400">DPT</span></h1>
+          <h1 class="text-xl font-black uppercase italic tracking-tight">Admin<span class="text-primary not-italic">DPT</span></h1>
         </div>
         <div class="flex items-center gap-4">
           <!-- Header actions can go here if needed -->
@@ -67,34 +64,33 @@
           <div class="p-6 border-b border-white/5 space-y-6 bg-white/[0.01]">
             <div class="flex items-center justify-between">
               <h2 class="font-bold flex items-center gap-2 text-slate-100 uppercase tracking-tight">
-                <i class="fas fa-microchip text-blue-400"></i>
+                <i class="fas fa-microchip text-primary"></i>
                 Loan Requests (DPT Dept)
               </h2>
             </div>
-
             <!-- Refined Filters -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div class="space-y-1.5">
                 <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Name</label>
                 <div class="relative group">
-                  <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors group-focus-within:text-blue-400"></i>
+                  <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors group-focus-within:text-primary"></i>
                   <input 
                     v-model="filters.name" 
                     type="text" 
                     placeholder="Search user..." 
-                    class="w-full bg-slate-900 border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 transition-all font-medium" 
+                    class="w-full bg-slate-900 border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium" 
                   />
                 </div>
               </div>
               <div class="space-y-1.5">
                 <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Booking Number</label>
                 <div class="relative group">
-                  <i class="fas fa-hashtag absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors group-focus-within:text-blue-400"></i>
+                  <i class="fas fa-hashtag absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors group-focus-within:text-primary"></i>
                   <input 
                     v-model="filters.number" 
                     type="text" 
                     placeholder="LR-..." 
-                    class="w-full bg-slate-900 border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 transition-all font-medium" 
+                    class="w-full bg-slate-900 border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium" 
                   />
                 </div>
               </div>
@@ -104,7 +100,7 @@
                   <input 
                     v-model="filters.date" 
                     type="date" 
-                    class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 transition-all font-medium [color-scheme:dark]" 
+                    class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium [color-scheme:dark]" 
                   />
                 </div>
               </div>
@@ -113,7 +109,7 @@
                 <div class="relative">
                   <select 
                     v-model="filters.status" 
-                    class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 transition-all appearance-none cursor-pointer font-medium"
+                    class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-all appearance-none cursor-pointer font-medium"
                   >
                     <option value="pending">Pending</option>
                     <option value="approve">Approve</option>
@@ -143,13 +139,13 @@
               <tbody class="divide-y divide-white/5">
                 <tr v-if="isLoading && !requests.length">
                   <td colspan="8" class="px-6 py-12 text-center text-slate-500">
-                    <i class="fas fa-circle-notch animate-spin mb-3 text-3xl text-blue-400 block mx-auto"></i>
+                    <i class="fas fa-circle-notch animate-spin mb-3 text-3xl text-primary block mx-auto"></i>
                     Processing technical queue...
                   </td>
                 </tr>
                 <tr v-else v-for="request in filteredRequests" :key="request.id" class="hover:bg-white/[0.02] transition-colors group text-sm">
                   <td class="px-6 py-5">
-                    <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded text-[10px] font-mono font-bold text-blue-400">
+                    <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded text-[10px] font-mono font-bold text-primary">
                       {{ request.code }}
                     </span>
                   </td>
@@ -159,19 +155,19 @@
                   <td class="px-6 py-5">
                     <div class="flex flex-col">
                        <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Start</span>
-                       <span class="text-blue-400 font-mono">{{ request.start_time }}</span>
+                       <span class="text-primary font-mono">{{ request.start_time }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
                     <div class="flex flex-col">
                        <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">End</span>
-                       <span class="text-blue-400 font-mono">{{ request.end_time }}</span>
+                       <span class="text-primary font-mono">{{ request.end_time }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
                     <span :class="[
                       'px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider',
-                      (request.status_dpt || '').toLowerCase().startsWith('approv') ? 'bg-blue-500/10 text-blue-400' : 
+                      (request.status_dpt || '').toLowerCase().startsWith('approv') ? 'bg-primary/10 text-primary' : 
                       (request.status_dpt || '').toLowerCase().startsWith('rejected') ? 'bg-red-500/10 text-red-400' : 
                       'bg-amber-500/10 text-amber-400'
                     ]">
@@ -181,7 +177,7 @@
                   <td class="px-6 py-5 text-right">
                     <button 
                       @click="openManageModal(request)" 
-                      class="px-4 py-2 bg-slate-900 border border-white/5 rounded-xl text-[10px] font-bold hover:bg-slate-800 hover:text-blue-400 transition-all text-slate-400 flex items-center ml-auto gap-2"
+                      class="px-4 py-2 bg-slate-900 border border-white/5 rounded-xl text-[10px] font-bold hover:bg-slate-800 hover:text-primary transition-all text-slate-400 flex items-center ml-auto gap-2"
                     >
                       <i class="fas fa-cog"></i>
                       Manage
@@ -206,7 +202,7 @@
       <div v-if="showModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
         <div class="glass-card w-full max-w-lg border-white/5 animate-in fade-in zoom-in duration-300">
           <div class="p-6 border-b border-white/5 flex items-center justify-between">
-            <h3 class="text-lg font-bold">Adjust <span class="text-blue-400">Request</span></h3>
+            <h3 class="text-lg font-bold">Adjust <span class="text-primary">Request</span></h3>
             <button @click="showModal = false" class="text-slate-500 hover:text-white transition-colors">
               <i class="fas fa-times"></i>
             </button>
@@ -215,14 +211,14 @@
              <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-1.5">
                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Room Allocation</label>
-                   <select v-model="manageForm.room_id" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500/50 appearance-none text-slate-200">
+                   <select v-model="manageForm.room_id" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 appearance-none text-slate-200">
                       <option value="">Unassigned</option>
                       <option v-for="r in rooms" :key="r.id" :value="r.id">{{ r.nameroom }}</option>
                    </select>
                 </div>
                 <div class="space-y-1.5">
                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">DPT Status</label>
-                   <select v-model="manageForm.status_dpt" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500/50 appearance-none text-slate-200">
+                   <select v-model="manageForm.status_dpt" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 appearance-none text-slate-200">
                       <option value="pending">Pending</option>
                       <option value="approve">Approve</option>
                       <option value="rejected">Rejected</option>
@@ -233,11 +229,11 @@
              <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-1.5">
                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">Start Date & Time</label>
-                   <input v-model="manageForm.start_time" type="datetime-local" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500/50 [color-scheme:dark]" />
+                   <input v-model="manageForm.start_time" type="datetime-local" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 [color-scheme:dark]" />
                 </div>
                 <div class="space-y-1.5">
                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">End Date & Time</label>
-                   <input v-model="manageForm.end_time" type="datetime-local" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500/50 [color-scheme:dark]" />
+                   <input v-model="manageForm.end_time" type="datetime-local" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 [color-scheme:dark]" />
                 </div>
              </div>
 
@@ -245,9 +241,9 @@
                 <button @click="showModal = false" class="flex-1 px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all text-slate-300">
                   Discard
                 </button>
-                <button @click="saveChanges" class="flex-1 px-4 py-3 bg-blue-500 rounded-xl text-sm font-bold hover:bg-blue-600 transition-all text-white shadow-lg shadow-blue-500/20">
-                  Apply Updates
-                </button>
+              <button @click="saveChanges" class="flex-1 px-4 py-3 bg-primary rounded-xl text-sm font-bold hover:bg-primary/80 transition-all text-[#032038] shadow-lg shadow-primary/20">
+                Apply Updates
+              </button>
              </div>
           </div>
         </div>
@@ -259,6 +255,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import api from '../services/api'
+import logo from '../assets/logo.png'
+import { showAlert } from '../services/alertService'
 
 const showModal = ref(false)
 const filters = ref({ name: '', number: '', date: '', status: 'pending' })
@@ -361,12 +359,12 @@ const saveChanges = async () => {
     // Using code instead of ID for the update endpoint as requested
     await api.put(`/bookings/${activeRequest.value.code}`, payload)
     
-    alert('Technical request updated successfully!')
+    showAlert({ title: 'Standardized!', message: 'Technical request updated successfully!', type: 'success' })
     showModal.value = false
     fetchDPTData()
   } catch (error) {
     console.error('Failed to update request:', error)
-    alert(error.response?.data?.message || 'Failed to update request.')
+    showAlert({ title: 'Error', message: error.response?.data?.message || 'Failed to update request.', type: 'error' })
   } finally {
     isLoading.value = false
   }

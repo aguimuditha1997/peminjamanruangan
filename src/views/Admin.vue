@@ -1,34 +1,31 @@
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex">
+  <div class="min-h-screen bg-background text-white flex">
     <!-- Sidebar -->
     <aside class="w-64 border-r border-white/5 bg-slate-900/50 backdrop-blur-xl flex flex-col sticky top-0 h-screen overflow-y-auto">
       <div class="p-6">
         <RouterLink to="/" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
-            <i class="fas fa-bolt text-white text-xs"></i>
-          </div>
-          <span class="text-lg font-bold tracking-tight text-white">Admin<span class="text-emerald-400">Dash</span></span>
+          <img :src="logo" alt="Primakara Logo" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300" />
         </RouterLink>
       </div>
 
       <nav class="flex-1 px-4 space-y-2 mt-4">
-        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-th-large w-5"></i>
           Dashboard
         </RouterLink>
-        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-door-open w-5"></i>
           Room Name
         </RouterLink>
-        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-calendar-alt w-5"></i>
           Activity Schedule
         </RouterLink>
-        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-user-tie w-5"></i>
           Admin HR
         </RouterLink>
-        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-users-cog w-5"></i>
           Admin DPT
         </RouterLink>
@@ -52,11 +49,11 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 min-h-screen bg-slate-950">
+    <main class="flex-1 min-h-screen bg-background">
       <!-- Header -->
-      <header class="h-20 border-b border-white/5 bg-slate-900/20 backdrop-blur-sm px-8 flex items-center justify-between sticky top-0 z-10 w-full">
+      <header class="h-20 border-b border-white/5 bg-[#032038]/40 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10 w-full">
         <div>
-          <h1 class="text-xl font-bold">Management <span class="text-emerald-400">Dashboard</span></h1>
+          <h1 class="text-xl font-black uppercase italic tracking-tight">Admin<span class="text-primary not-italic">Dashboard</span></h1>
         </div>
         <div class="flex items-center gap-4">
           <div class="relative">
@@ -72,11 +69,11 @@
       <div class="p-8 space-y-8 max-w-7xl mx-auto">
         <!-- Stats Summary -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="glass-card p-8 border-white/5 bg-gradient-to-br from-emerald-500/10 to-transparent relative overflow-hidden group">
-            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-all"></div>
+          <div class="glass-card p-8 border-white/5 bg-gradient-to-br from-primary/10 to-transparent relative overflow-hidden group">
+            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all"></div>
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center">
-                <i class="fas fa-door-open text-emerald-400 text-xl"></i>
+              <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
+                <i class="fas fa-door-open text-primary text-xl"></i>
               </div>
               <div>
                 <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Rooms</p>
@@ -92,15 +89,15 @@
             </p>
           </div>
 
-          <div class="glass-card p-8 border-white/5 bg-gradient-to-br from-blue-500/10 to-transparent relative overflow-hidden group">
-            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-all"></div>
+          <div class="glass-card p-8 border-white/5 bg-[#1dcad3]/5 relative overflow-hidden group">
+            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all"></div>
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center">
-                <i class="fas fa-calendar-check text-blue-400 text-xl"></i>
+              <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
+                <i class="fas fa-calendar-check text-primary text-xl"></i>
               </div>
               <div>
                 <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Total Bookings</p>
-                <h3 class="text-3xl font-bold text-slate-100">{{ rentals.length }}</h3>
+                <h3 class="text-3xl font-bold text-white">{{ rentals.length }}</h3>
               </div>
             </div>
             <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
@@ -172,14 +169,14 @@
                 <tr v-for="rental in filteredRentals" :key="rental.id" class="hover:bg-white/[0.02] transition-colors group">
                   <td class="px-6 py-5">
                     <div class="flex items-center gap-3">
-                      <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-[10px] font-bold text-emerald-400 border border-emerald-500/10">
+                      <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary border border-primary/10">
                         {{ rental.user.split(' ').map(n => n[0]).join('') }}
                       </div>
                       <span class="font-bold text-sm text-slate-200">{{ rental.user }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/5 px-2 py-1 rounded border border-emerald-500/10 tracking-wider">
+                    <span class="text-xs font-mono text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10 tracking-wider">
                       {{ rental.code }}
                     </span>
                   </td>
@@ -204,7 +201,7 @@
                   <td class="px-6 py-5 text-right">
                     <button 
                       @click="openDetailsModal(rental)" 
-                      class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider bg-emerald-400/10 px-3 py-1.5 rounded-lg border border-emerald-400/20 transition-all flex items-center gap-1.5 ml-auto"
+                      class="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-wider bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20 transition-all flex items-center gap-1.5 ml-auto"
                     >
                       <i class="fas fa-info-circle"></i>
                       Details
@@ -228,10 +225,10 @@
         <div class="glass-card border-white/5 overflow-hidden">
           <div class="p-6 border-b border-white/5 bg-white/[0.01] flex items-center justify-between">
             <h2 class="font-bold flex items-center gap-2">
-              <i class="fas fa-door-open text-emerald-400"></i>
+              <i class="fas fa-door-open text-primary"></i>
               Room Details Table
             </h2>
-            <button @click="openModal()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+            <button @click="openModal()" class="px-4 py-2 bg-primary hover:bg-primary/80 text-[#032038] rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
               <i class="fas fa-plus text-[10px]"></i>
               Add New Room
             </button>
@@ -323,7 +320,7 @@
             </div>
             <div class="pt-4 flex gap-3">
               <button type="button" @click="closeModal" class="flex-1 px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm font-bold hover:bg-slate-800 text-slate-300">Cancel</button>
-              <button type="submit" class="flex-1 px-4 py-3 bg-emerald-500 rounded-xl text-sm font-bold hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20">
+              <button type="submit" class="flex-1 px-4 py-3 bg-primary rounded-xl text-sm font-bold hover:bg-primary/80 text-[#032038] shadow-lg shadow-primary/20">
                 {{ isEditing ? 'Save Changes' : 'Create Room' }}
               </button>
             </div>
@@ -475,6 +472,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import api from '../services/api'
+import logo from '../assets/logo.png'
 
 const rooms = ref([])
 const rentals = ref([])

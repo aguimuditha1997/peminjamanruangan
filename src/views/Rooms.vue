@@ -1,34 +1,31 @@
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex">
+  <div class="min-h-screen bg-background text-white flex">
     <!-- Sidebar -->
     <aside class="w-64 border-r border-white/5 bg-slate-900/50 backdrop-blur-xl flex flex-col sticky top-0 h-screen overflow-y-auto">
       <div class="p-6">
         <RouterLink to="/" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
-            <i class="fas fa-bolt text-white text-xs"></i>
-          </div>
-          <span class="text-lg font-bold tracking-tight text-white">Admin<span class="text-emerald-400">Dash</span></span>
+          <img :src="logo" alt="Primakara Logo" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300" />
         </RouterLink>
       </div>
 
       <nav class="flex-1 px-4 space-y-2 mt-4">
-        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-th-large w-5"></i>
           Dashboard
         </RouterLink>
-        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-door-open w-5"></i>
           Room Name
         </RouterLink>
-        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-calendar-alt w-5"></i>
           Activity Schedule
         </RouterLink>
-        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-user-tie w-5"></i>
           Admin HR
         </RouterLink>
-        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-emerald-500/10 !text-emerald-400">
+        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-users-cog w-5"></i>
           Admin DPT
         </RouterLink>
@@ -52,13 +49,13 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 min-h-screen bg-slate-950">
-      <header class="h-20 border-b border-white/5 bg-slate-900/20 backdrop-blur-sm px-8 flex items-center justify-between sticky top-0 z-10 w-full">
+    <main class="flex-1 min-h-screen bg-background">
+      <header class="h-20 border-b border-white/5 bg-[#032038]/40 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10 w-full">
         <div>
-          <h1 class="text-xl font-bold">Room <span class="text-emerald-400">Management</span></h1>
+          <h1 class="text-xl font-black uppercase italic tracking-tight">Room<span class="text-primary not-italic">Management</span></h1>
         </div>
         <div class="flex items-center gap-4">
-          <button @click="openModal()" class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-bold transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+          <button @click="openModal()" class="px-6 py-2.5 bg-primary hover:bg-primary/80 text-[#032038] rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
             <i class="fas fa-plus"></i>
             Add Room
           </button>
@@ -69,13 +66,13 @@
         <div class="glass-card border-white/5 overflow-hidden">
           <div class="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
             <h2 class="font-bold flex items-center gap-2">
-              <i class="fas fa-list text-emerald-400"></i>
+              <i class="fas fa-list text-primary"></i>
               Available Rooms
             </h2>
             <div class="flex items-center gap-3">
               <div class="relative">
                 <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                <input v-model="searchQuery" type="text" placeholder="Search rooms..." class="bg-slate-900 border border-white/5 rounded-lg pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-emerald-500/50 w-48 transition-all" />
+                <input v-model="searchQuery" type="text" placeholder="Search rooms..." class="bg-slate-900 border border-white/5 rounded-lg pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-primary/50 w-48 transition-all" />
               </div>
             </div>
           </div>
@@ -112,7 +109,7 @@
                   </td>
                   <td class="px-6 py-5 text-right">
                     <div class="flex items-center justify-end gap-2">
-                      <button @click="openModal(room)" class="p-2 hover:bg-emerald-500/10 rounded-lg transition-all text-slate-400 hover:text-emerald-400" title="Edit">
+                      <button @click="openModal(room)" class="p-2 hover:bg-primary/10 rounded-lg transition-all text-slate-400 hover:text-primary" title="Edit">
                         <i class="fas fa-edit text-xs"></i>
                       </button>
                       <button @click="deleteRoom(room)" class="p-2 hover:bg-red-500/10 rounded-lg transition-all text-slate-400 hover:text-red-400" title="Delete">
@@ -149,17 +146,17 @@
           <form @submit.prevent="saveRoom" class="p-6 space-y-4 overflow-y-auto custom-scrollbar">
             <!-- Room Name -->
             <div class="space-y-1.5">
-              <input v-model="form.nameroom" type="text" required placeholder="Name Room (e.g. Executive Lounge)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50 transition-all font-medium text-slate-200" />
+              <input v-model="form.nameroom" type="text" required placeholder="Name Room (e.g. Executive Lounge)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium text-slate-200" />
             </div>
 
             <!-- Capacity -->
             <div class="space-y-1.5">
-              <input v-model.number="form.capacity" type="number" required placeholder="Capacity (e.g. 10)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50 transition-all font-medium text-slate-200" />
+              <input v-model.number="form.capacity" type="number" required placeholder="Capacity (e.g. 10)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium text-slate-200" />
             </div>
 
             <!-- Details -->
             <div class="space-y-1.5">
-              <textarea v-model="form.detail" rows="3" placeholder="Room Details (Describe features, amenities, etc.)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50 transition-all font-medium resize-none text-slate-200"></textarea>
+              <textarea v-model="form.detail" rows="3" placeholder="Room Details (Describe features, amenities, etc.)" class="w-full bg-slate-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 transition-all font-medium resize-none text-slate-200"></textarea>
             </div>
 
             <!-- Images -->
@@ -171,9 +168,9 @@
                     <i class="fas fa-trash text-[10px] text-white"></i>
                   </button>
                 </div>
-                <label class="aspect-video rounded-lg border-2 border-dashed border-white/5 hover:border-emerald-500/50 transition-all flex flex-col items-center justify-center cursor-pointer bg-slate-900/50 group">
-                  <i class="fas fa-plus text-slate-500 group-hover:text-emerald-400 mb-1"></i>
-                  <span class="text-[10px] text-slate-500 group-hover:text-emerald-400 font-bold uppercase tracking-wider">Upload</span>
+                <label class="aspect-video rounded-lg border-2 border-dashed border-white/5 hover:border-primary/50 transition-all flex flex-col items-center justify-center cursor-pointer bg-slate-900/50 group">
+                  <i class="fas fa-plus text-slate-500 group-hover:text-primary mb-1"></i>
+                  <span class="text-[10px] text-slate-500 group-hover:text-primary font-bold uppercase tracking-wider">Upload</span>
                   <input type="file" @change="handleFileUpload" multiple accept="image/*" class="hidden" />
                 </label>
               </div>
@@ -184,7 +181,7 @@
               <button type="button" @click="closeModal" class="flex-1 px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all text-slate-300">
                 Cancel
               </button>
-              <button type="submit" class="flex-1 px-4 py-3 bg-emerald-500 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all text-white shadow-lg shadow-emerald-500/20">
+              <button type="submit" class="flex-1 px-4 py-3 bg-primary rounded-xl text-sm font-bold hover:bg-primary/80 transition-all text-[#032038] shadow-lg shadow-primary/20">
                 {{ isEditing ? 'Save Changes' : 'Create Room' }}
               </button>
             </div>
@@ -198,6 +195,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import api from '../services/api'
+import logo from '../assets/logo.png'
+import { showAlert } from '../services/alertService'
 
 const rooms = ref([])
 const isLoading = ref(false)
@@ -320,19 +319,19 @@ const saveRoom = async () => {
       await api.post(`/rooms/${currentRoomSlug.value}?_method=PUT`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
-      alert('Room updated successfully!')
+      showAlert({ title: 'Updated!', message: 'Room updated successfully!', type: 'success' })
     } else {
       await api.post('/rooms', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
-      alert('Room created successfully!')
+      showAlert({ title: 'Created!', message: 'Room created successfully!', type: 'success' })
     }
     
     closeModal()
     fetchRooms() // Refresh the list
   } catch (error) {
     console.error('Failed to save room:', error)
-    alert(error.response?.data?.message || 'Failed to save room. Please check your input.')
+    showAlert({ title: 'Error', message: error.response?.data?.message || 'Failed to save room. Please check your input.', type: 'error' })
   } finally {
     isLoading.value = false
   }
@@ -344,11 +343,11 @@ const deleteRoom = async (room) => {
     try {
       const slug = room.slug || slugify(room.nameroom)
       await api.delete(`/rooms/${slug}`)
-      alert('Room deleted successfully!')
+      showAlert({ title: 'Deleted!', message: 'Room deleted successfully!', type: 'success' })
       fetchRooms()
     } catch (error) {
       console.error('Failed to delete room:', error)
-      alert('Failed to delete room.')
+      showAlert({ title: 'Error', message: 'Failed to delete room.', type: 'error' })
     } finally {
       isLoading.value = false
     }

@@ -1,34 +1,31 @@
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex">
+  <div class="min-h-screen bg-background text-white flex">
     <!-- Sidebar -->
     <aside class="w-64 border-r border-white/5 bg-slate-900/50 backdrop-blur-xl flex flex-col sticky top-0 h-screen overflow-y-auto">
       <div class="p-6">
         <RouterLink to="/" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
-            <i class="fas fa-bolt text-white text-xs"></i>
-          </div>
-          <span class="text-lg font-bold tracking-tight text-white">Admin<span class="text-indigo-400">Dash</span></span>
+          <img :src="logo" alt="Primakara Logo" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300" />
         </RouterLink>
       </div>
 
       <nav class="flex-1 px-4 space-y-2 mt-4">
-        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-indigo-500/10 !text-indigo-400">
+        <RouterLink to="/admin" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-th-large w-5"></i>
           Dashboard
         </RouterLink>
-        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-indigo-500/10 !text-indigo-400">
+        <RouterLink to="/admin/rooms" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-door-open w-5"></i>
           Room Name
         </RouterLink>
-        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-indigo-500/10 !text-indigo-400">
+        <RouterLink to="/admin/activity" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-calendar-alt w-5"></i>
           Activity Schedule
         </RouterLink>
-        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-indigo-500/10 !text-indigo-400">
+        <RouterLink to="/admin/hr" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-user-tie w-5"></i>
           Admin HR
         </RouterLink>
-        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-indigo-500/10 !text-indigo-400">
+        <RouterLink to="/admin/dpt" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all font-medium" active-class="bg-primary/10 !text-primary">
           <i class="fas fa-users-cog w-5"></i>
           Admin DPT
         </RouterLink>
@@ -52,15 +49,15 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 min-h-screen bg-slate-950">
-      <header class="h-20 border-b border-white/5 bg-slate-900/20 backdrop-blur-sm px-8 flex items-center justify-between sticky top-0 z-10 w-full">
+    <main class="flex-1 min-h-screen bg-background">
+      <header class="h-20 border-b border-white/5 bg-[#032038]/40 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10 w-full">
         <div>
-          <h1 class="text-xl font-bold">Activity <span class="text-indigo-400">Schedule</span></h1>
+          <h1 class="text-xl font-black uppercase italic tracking-tight">Activity<span class="text-primary not-italic">Schedule</span></h1>
         </div>
         <div class="flex items-center gap-4">
            <div class="flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-bold text-slate-500 uppercase">Current Month:</span>
-            <span class="text-xs font-bold text-indigo-400">{{ currentMonth }}</span>
+            <span class="text-xs font-bold text-primary">{{ currentMonth }}</span>
           </div>
         </div>
       </header>
@@ -81,6 +78,8 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import logo from '../assets/logo.png'
+import { showAlert } from '../services/alertService'
 
 const bookings = ref([])
 
@@ -113,7 +112,7 @@ const approvedEvents = computed(() => {
         room: b.room?.nameroom || b.room_name,
         code: b.code || b.loan_code
       },
-      color: (b.room?.nameroom || b.room_name || '').includes('HR') ? '#10b981' : '#3b82f6'
+      color: '#1dcad3'
     }))
 })
 
@@ -132,16 +131,18 @@ const calendarOptions = computed(() => ({
     const start = info.event.start.toLocaleString()
     const end = info.event.end ? info.event.end.toLocaleString() : 'N/A'
     
-    alert(
-      `Booking Details:\n` +
-      `------------------\n` +
-      `User: ${name || 'N/A'}\n` +
-      `Org: ${organization || 'N/A'}\n` +
-      `Room: ${room || 'N/A'}\n` +
-      `Code: ${code || 'N/A'}\n` +
-      `Start: ${start}\n` +
-      `End: ${end}`
-    )
+    showAlert({
+      title: 'Booking Details',
+      type: 'details',
+      details: {
+        'User': name || 'N/A',
+        'Organization': organization || 'N/A',
+        'Room Name': room || 'N/A',
+        'Request Code': code || 'N/A',
+        'Start Time': start,
+        'End Time': end
+      }
+    })
   }
 }))
 
@@ -163,9 +164,9 @@ const handleLogout = () => {
   --fc-button-bg-color: rgba(255, 255, 255, 0.05);
   --fc-button-border-color: rgba(255, 255, 255, 0.1);
   --fc-button-hover-bg-color: rgba(255, 255, 255, 0.1);
-  --fc-button-active-bg-color: #6366f1;
-  --fc-button-active-border-color: #6366f1;
-  --fc-today-bg-color: rgba(99, 102, 241, 0.05);
+  --fc-button-active-bg-color: #1dcad3;
+  --fc-button-active-border-color: #1dcad3;
+  --fc-today-bg-color: rgba(29, 202, 211, 0.05);
   color: #e2e8f0;
 }
 

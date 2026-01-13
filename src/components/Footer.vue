@@ -1,49 +1,52 @@
+<script setup>
+import logo from '../assets/logo.png'
+</script>
+
 <template>
-  <footer class="bg-slate-950 border-t border-white/5 pt-20 pb-10 px-6">
+  <footer class="bg-background border-t border-white/5 pt-20 pb-10 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
-        <div class="flex items-center gap-2 mb-6">
-          <div class="w-8 h-8 bg-emerald-500 rounded flex items-center justify-center">
-            <span class="text-white font-bold">R</span>
-          </div>
-          <span class="text-xl font-bold tracking-tight">Room<span class="text-emerald-500">Book</span></span>
+        <div class="flex flex-col mb-6">
+          <img :src="logo" alt="Primakara Logo" class="h-10 w-auto mb-4 self-start" />
+          <p class="text-slate-400 text-sm font-medium leading-relaxed max-w-xs mb-4">
+            Jl. Tukad Badung No.135, Renon, Denpasar Selatan, Kota Denpasar, Bali 80226
+          </p>
+          <a href="https://maps.app.goo.gl/Fan5fsCY1xzAytT96" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-primary text-xs font-bold hover:bg-primary hover:text-[#032038] transition-all w-fit">
+            <i class="fas fa-map-marker-alt"></i>
+            Lihat di Google Maps
+          </a>
         </div>
-        <p class="text-slate-400 max-w-sm leading-relaxed">
-          The ultimate platform for professional room reservations. Streamlining your organizational needs with premium spaces and expert management.
-        </p>
       </div>
       
       <div>
-        <h4 class="font-bold mb-6 text-slate-200 uppercase text-xs tracking-widest">Navigation</h4>
-        <ul class="space-y-4 text-slate-400 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-colors">Our Rooms</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-colors">Pricing</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-colors">Careers</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+        <h4 class="font-bold mb-6 text-slate-200 uppercase text-xs tracking-widest">Navigasi</h4>
+        <ul class="space-y-4 text-slate-400 text-sm font-bold uppercase tracking-wider">
+          <li><a href="#" class="hover:text-primary transition-colors">Ruangan</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Reservasi</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Jadwal Tersedia</a></li>
         </ul>
       </div>
       
       <div>
-        <h4 class="font-bold mb-6 text-slate-200 uppercase text-xs tracking-widest">Connect</h4>
-        <ul class="space-y-4 text-slate-400 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-colors flex items-center gap-2">
+        <h4 class="font-bold mb-6 text-slate-200 uppercase text-xs tracking-widest">Hubungi Kami</h4>
+        <ul class="space-y-4 text-slate-400 text-sm font-bold uppercase tracking-wider">
+          <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2">
             <i class="fab fa-instagram"></i> Instagram
           </a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-colors flex items-center gap-2">
+          <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2">
             <i class="fab fa-whatsapp"></i> WhatsApp
           </a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-colors flex items-center gap-2">
+          <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2">
             <i class="fab fa-linkedin"></i> LinkedIn
           </a></li>
         </ul>
       </div>
     </div>
     
-    <div class="max-w-7xl mx-auto pt-10 border-t border-white/5 flex flex-col md:row items-center justify-between gap-6 text-slate-500 text-xs">
-      <p>© 2026 RoomBook Inc. All rights reserved.</p>
+    <div class="max-w-7xl mx-auto pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+      <p>© 2026 Primakara University. All rights reserved.</p>
       <div class="flex gap-8">
-        <a href="#" class="hover:text-slate-300">Privacy Policy</a>
-        <a href="#" class="hover:text-slate-300">Terms of Service</a>
+        <p class="hover:text-primary">Created by: Agui Muditha</p>
       </div>
     </div>
   </footer>

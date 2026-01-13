@@ -1,33 +1,64 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #0f172a;
-  --color-secondary: #1e293b;
-  --color-accent: #10b981;
-  /* Emerald */
-  --color-danger: #f43f5e;
-  /* Rose */
-  --color-glass: rgba(255, 255, 255, 0.1);
+@font-face {
+    font-family: 'XDPrime';
+    src: url('./assets/XDPrime-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
 
-  --font-serif: "Sora", sans-serif;
+@font-face {
+    font-family: 'XDPrime';
+    src: url('./assets/XDPrime-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'XDPrime';
+    src: url('./assets/XDPrime-ExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'XDPrime';
+    src: url('./assets/XDPrime-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@theme {
+    --color-primary: #1dcad3;
+    --color-background: #032038;
+    --color-accent: #1dcad3;
+    --color-danger: #f43f5e;
+    --color-glass: rgba(255, 255, 255, 0.05);
+    --color-white: #ffffff;
+
+    --font-sans: "XDPrime", sans-serif;
 }
 
 @layer base {
-  body {
-    @apply bg-slate-950 text-slate-200 font-serif antialiased;
-  }
+    body {
+        @apply bg-background text-white font-sans antialiased selection:bg-primary/30;
+    }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl;
-  }
+    .glass-card {
+        @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl;
+    }
 
-  .btn-primary {
-    @apply px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20;
-  }
+    .btn-primary {
+        @apply px-6 py-3 bg-primary hover:bg-primary/90 text-[#032038] font-bold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-primary/20;
+    }
 
-  .input-field {
-    @apply w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all;
-  }
+    .btn-secondary {
+        @apply px-6 py-3 border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition-all duration-300;
+    }
+
+    .input-field {
+        @apply w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all;
+    }
 }
